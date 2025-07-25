@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbot</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* CSS for styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-bar {
+      background-color: #2d3748;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+    }
+    .container {
+      max-width: 1024px;
+      margin: auto;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .menu {
+      display: flex;
+      align-items: center;
+    }
+    .menu img {
+      height: 40px;
+    }
+    .menu-items {
+      display: flex;
+      gap: 1rem;
+      margin-left: 1rem;
+    }
+    .menu-items a {
+      background-color: #2d3748;
+      color: #cbd5e0;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    .menu-items a:hover {
+      background-color: #4a5568;
+      color: white;
+    }
+    .menu-button {
+      background-color: #2d3748;
+      color: #cbd5e0;
+      border-radius: 2rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s, color 0.3s;
+      margin-right: 10px; /* Space between button and container */
+    }
+    .menu-button:hover {
+      background-color: #ccd2dd;
+      color: white;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #ffffff;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    .show {
+      display: block;
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+    }
+    .icon {
+      display: none;
+    }
+    .button-container {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    @media (max-width: 640px) {
+      .menu-items {
+        display: none;
+      }
+      .icon {
+        display: block;
+      }
+      .mobile-menu.show {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-900 h-screen flex flex-col">
+  <!-- Navigation Bar -->
+  <div class="nav-bar">
+    <button class="menu-button">&gt;</button>
+    <div class="container">
+      <div class="menu">
+        <img src="https://msit.in/static/img/msit.png" alt="Your Company">
+        <div class="menu-items">
+          <a href="#">Chat with Bot...🤖</a>
+        </div>
+      </div>
+      <button class="icon menu-button" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Button container with flexbox -->
+      <div class="button-container">
+        <!-- Reload Button -->
+        <button class="menu-button" onclick="reloadPage()">
+          <img src="https://icons.veryicon.com/png/o/miscellaneous/standard-general-linear-icon/reload-19.png" alt="Reload" width="24" height="24">
+        </button>
+
+        <!-- Dropdown Button -->
+        <div class="dropdown">
+          <button class="menu-button" onclick="toggleDropdown()">
+            <img alt="" src="https://openclipart.org/image/800px/307415" class="h-8 w-8 rounded-full" width="40" height="40">
+          </button>
+          <div id="dropdownMenu" class="dropdown-content">
+            <a href="https://msit.in/">Home</a>
+            <a href="https://msit.in/contact">Help</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript for dropdown and mobile menu -->
+  <script>
+    function toggleDropdown() {
+      document.getElementById("dropdownMenu").classList.toggle("show");
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById("mobileMenu").classList.toggle("show");
+    }
+
+    function reloadPage() {
+      location.reload();
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.closest('.dropdown') && !event.target.closest('.menu-button')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    };
+  </script>
+</body>
+</html>

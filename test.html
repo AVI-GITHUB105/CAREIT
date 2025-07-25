@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* CSS for styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-bar {
+      background-color: #2d3748;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 50;
+    }
+    /* .container {
+      max-width: 1024px;
+      margin: auto;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    } */
+    .container {
+      width: 100%; 
+  margin: 0; /* Changed from auto to 0 to decrease margin */
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+    .menu {
+      display: flex;
+      align-items: center;
+      
+    }
+    .menu img {
+      height: 40px;
+    }
+    .menu-items {
+      display: flex;
+      gap: 1rem;
+      margin-left: 1rem;
+    }
+    .menu-items a {
+      background-color: #2d3748;
+      color: #cbd5e0;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    .menu-items a:hover {
+      background-color: #4a5568;
+      color: white;
+    }
+    .menu-button {
+      background-color: #2d3748;
+      color: #cbd5e0;
+      border-radius: 2rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      height: 40px; /* Set height */
+      width: 40px; /* Set width */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s, color 0.3s; /* Add smooth transition */
+    }
+    .menu-button:hover {
+      background-color: #ccd2dd; /* Change to the same hover color as menu items */
+      color: white; /* Change text color */
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #ffffff;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    .show {
+      display: block;
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+    }
+    .icon {
+      display: none;
+    }
+    /* Flexbox for buttons */
+    .button-container {
+      display: flex;
+      gap: 8px; /* small gap between buttons */
+      align-items: center;
+    }
+    @media (max-width: 640px) {
+      .menu-items {
+        display: none;
+      }
+      .icon {
+        display: block;
+      }
+      .mobile-menu.show {
+        display: flex;
+      }
+    }
+    .menu-button:first-of-type {
+  margin-left: 20px; /* Adjust this value as needed */
+}
+
+#chatbot {
+  flex-direction: column;
+  background-image: url("serviselast.jpg"); /* Replace with your image URL */
+  background-size: cover; /* Make the image cover the entire div */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent tiling */
+  height: 100vh;
+  color: white; /* Text color to contrast the background */
+}
+/* Your existing CSS here */
+#chatbot {
+      flex-grow: 1;
+      background-image: url("serviselast.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+    }
+    .sidebar {
+      background-color: #2d3748;
+      border: 2px solid #4a5568;
+      color: white;
+      width: 250px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sidebar a {
+      color: #cbd5e0;
+      text-decoration: none;
+      margin: 8px 0;
+      padding: 10px;
+      width: 100%;
+      text-align: center;
+      border-radius: 4px;
+      border: 2px solid #0df56e;
+      background-color: #021207;
+      transition: background-color 0.3s;
+    }
+    .sidebar a:hover {
+      background-color: #2f855a;
+    }
+    
+    /* Center Text Styling */
+.center-text {
+  flex-grow: 1;
+  text-align: center;
+  color: orange; /* Set text color to orange */
+  font-size: 24px; /* Increase text size */
+  font-weight: bold;
+}
+
+  </style>
+</head>
+<body class="bg-gray-900 h-screen flex flex-col">
+  <!-- Navigation Bar -->
+<div class="nav-bar">
+  <div class="container">
+      
+    <div class="menu">
+      <img src="careit.png" alt="Your Company">
+      <div class="menu-items">
+        <a href="#">Chat with Careit Bot...🤖</a>
+      </div>
+    </div>
+
+    <!-- Centered Mental Health Text -->
+    <div class="center-text">
+      <p>CARE.IT</p>
+    </div>
+
+    <!-- Button container with flexbox -->
+    <div class="button-container">
+      <!-- Reload Button -->
+      <button class="menu-button" onclick="reloadPage()">
+        <img src="https://icons.veryicon.com/png/o/miscellaneous/standard-general-linear-icon/reload-19.png" alt="Reload" width="24" height="24">
+      </button>
+
+      <!-- Dropdown Button -->
+      <div class="dropdown">
+        <button class="menu-button" onclick="toggleDropdown()">
+          <img alt="" src="https://openclipart.org/image/800px/307415" class="h-8 w-8 rounded-full" width="40" height="40">
+        </button>
+        <div id="dropdownMenu" class="dropdown-content">
+          <a href="https://msit.in/">Home</a>
+          <a href="https://msit.in/contact">Help</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="#">Chat with Bot...🤖</a>
+  </div>
+</div>
+
+
+  <!-- !-- Main Content Area with Sidebar and Chatbot -->
+  <div class="flex flex-grow">
+    <!-- Sidebar Section -->
+    <div class="sidebar">
+      <h2 class="text-xl font-bold mb-4">Menu</h2>
+      <a href="#">"Peace begins with a smile." – Mother Teresa</a>
+      <a href="#">"The greatest wealth is health." – Virgil</a>
+      <a href="#">"Calm mind brings inner strength and self-confidence, so that's very important for good health." – Dalai Lama</a>
+      <a href="#">"You don't have to control your thoughts. You just have to stop letting them control you." – Dan Millman</a>
+      <a href="#">"Happiness is not a matter of intensity but of balance, order, rhythm, and harmony." – Thomas Merton
+
+        "Calm mind </a>
+    </div>
+
+  <!-- Chatbot Section -->
+  <div id="chatbot" class="flex flex-col h-full">
+    <div class="flex flex-col items-center py-10 space-y-4 pt-20" style="margin: 1rem 1rem;">
+      <h1 class="text-2xl font-bold text-white">
+        <span id="greeting"></span>
+      </h1>
+      <div class="flex space-x-4">
+        <button
+          class="px-4 py-2 bg-green-600 text-white rounded-lg"
+          onclick="handleButtonClick('Mental Health')"
+        >
+          Mental Health
+        </button>
+        <button
+          class="px-4 py-2 bg-blue-600 text-white rounded-lg"
+          onclick="handleButtonClick('Depression')"
+        >
+        Depression
+        </button>
+        <button
+          class="px-4 py-2 bg-yellow-600 text-white rounded-lg"
+          onclick="handleButtonClick('Anxiety')"
+        >
+        Anxiety
+        </button>
+        <button
+          class="px-4 py-2 bg-purple-600 text-white rounded-lg"
+          onclick="handleButtonClick('Nervousness')"
+        >
+        Nervousness
+        </button>
+        <button
+          class="px-4 py-2 bg-gray-600 text-white rounded-lg"
+          onclick="handleButtonClick('More options')"
+        >
+          More
+        </button>
+      </div>
+    </div>
+
+    <!-- Chat History -->
+    <div id="chat-history" class="flex-grow overflow-y-auto p-4 pt-16"></div>
+
+    <!-- Input Section -->
+    <div class="p-4 border-t border-gray-200 bg-gray-800">
+      <div class="flex space-x-3">
+        <input
+          type="text"
+          id="user-query"
+          placeholder="Ask a question..."
+          class="flex-grow p-3 border text-gray-100 rounded-lg focus:outline-none bg-gray-900"
+          onkeydown="handleKeyPress(event)"
+        />
+        <button
+          onclick="handleUserQuery()"
+          id="ask-button"
+          class="bg-green-400 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Ask
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const chatHistory = [];
+    let loading = false;
+
+    // Function to update chat history in the UI
+    function updateChatHistory() {
+      const chatHistoryContainer = document.getElementById("chat-history");
+      chatHistoryContainer.innerHTML = chatHistory
+        .map(
+          (chat) => `
+          <div class="flex flex-col space-y-2">
+            <div class="flex justify-end">
+              <div class="bg-green-500 text-white p-3 rounded-br-none rounded-lg max-w-xs w-fit shadow-md">
+                ${chat.user}
+              </div>
+            </div>
+            <div class="flex justify-start">
+              <div class=" bg-yellow-600 text-white 0 p-3 rounded-bl-none rounded-lg max-w-xs w-fit shadow-md">
+                ${chat.bot}
+              </div>
+            </div>
+          </div>
+        `
+        )
+        .join("");
+      chatHistoryContainer.scrollTo(0, chatHistoryContainer.scrollHeight);
+    }
+
+    // Function to send query to backend
+    async function handleUserQuery() {
+      const userQuery = document.getElementById("user-query").value.trim();
+      if (!userQuery || loading) return;
+
+      loading = true;
+      document.getElementById("ask-button").textContent = "Loading...";
+      try {
+        const API_URL = "YOUR_API_URL_HERE"; // Replace with actual API URL
+        const response = await fetch(API_URL + "/query", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ query: userQuery }),
+        });
+
+        const { answer } = await response.json();
+        chatHistory.push({ user: userQuery, bot: answer });
+        updateChatHistory();
+      } catch (error) {
+        console.error("Error fetching response:", error);
+        chatHistory.push({ user: userQuery, bot: "Sorry, there was an error. Please try again." });
+        updateChatHistory();
+      } finally {
+        loading = false;
+        document.getElementById("ask-button").textContent = "Ask";
+        document.getElementById("user-query").value = "";
+      }
+    }
+
+    // Function to handle button clicks with predefined queries
+    function handleButtonClick(query) {
+      document.getElementById("user-query").value = query;
+      handleUserQuery();
+    }
+
+    // Function to handle Enter key press in input field
+    function handleKeyPress(event) {
+      if (event.key === "Enter") {
+        handleUserQuery();
+      }
+    }
+
+    // Animation for greeting text
+    document.addEventListener("DOMContentLoaded", () => {
+      const greeting = "What can I help with?";
+      const greetingElement = document.getElementById("greeting");
+      greetingElement.innerHTML = Array.from(greeting)
+        .map((char, index) => `<span style="animation-delay: ${index * 0.05}s">${char}</span>`)
+        .join("");
+    });
+  </script>
+
+
+<script>
+    // JavaScript for toggling dropdown and mobile menu
+    function toggleDropdown() {
+      document.getElementById("dropdownMenu").classList.toggle("show");
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById("mobileMenu").classList.toggle("show");
+    }
+
+    // Function to reload the page
+    function reloadPage() {
+      location.reload();
+    }
+
+    // Close the dropdown if clicked outside
+    window.onclick = function(event) {
+      if (!event.target.matches('.menu-button') && !event.target.matches('.h-8.w-8')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    };
+  </script>
+
+
+</body>
+</html>
